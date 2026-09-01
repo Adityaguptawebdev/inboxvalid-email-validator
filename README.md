@@ -5,9 +5,13 @@ widget that checks an address as the user types — locally where possible,
 and against a mock backend where a real check is needed — without ever
 blocking signup if that backend is unavailable.
 
+## 🚀 Live Demo
+
+[🔗 View Live Project](https://inboxvalid.onrender.com/)
+
 Built as a technical assignment demo for InboxValid.ai / Tvaram Private
 Limited.
-Live : https://inboxvalid.onrender.com/
+
 ---
 <img width="1492" height="888" alt="image" src="https://github.com/user-attachments/assets/99b46acc-b581-4b7f-adeb-67c0fc689f3a" />
 

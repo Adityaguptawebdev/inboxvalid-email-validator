@@ -1,0 +1,11 @@
+services:
+  - name: inboxvalid
+    type: web
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build && npm run build:server
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 20.19.0

@@ -27,11 +27,11 @@
     /^(?!.*\.\.)[a-zA-Z0-9](?:[a-zA-Z0-9._%+-]*[a-zA-Z0-9])?@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/;
 
   var STATE_COLORS = {
-    idle: "#94a3b8",
-    checking: "#4f46e5",
-    valid: "#059669",
+    idle: "#a8a29e",
+    checking: "#d97706",
+    valid: "#2b6142",
     invalid: "#dc2626",
-    unreachable: "#d97706",
+    unreachable: "#b45309",
   };
 
   var currentScript = document.currentScript;

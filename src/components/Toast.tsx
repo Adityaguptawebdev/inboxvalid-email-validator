@@ -16,15 +16,15 @@ export function Toast({ message, onDismiss, durationMs = 4000 }: ToastProps) {
   return (
     <div
       role="status"
-      className="fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2 rounded-xl bg-slate-900 px-4 py-3 text-sm font-medium text-white shadow-xl"
+      className="animate-fade-in-up mt-4 flex items-center gap-2 rounded-xl bg-forest-800 px-4 py-3 text-sm font-medium text-cream shadow-xl"
     >
-      <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" aria-hidden="true" />
+      <CheckCircle2 className="h-4 w-4 shrink-0 text-forest-300" aria-hidden="true" />
       <span>{message}</span>
       <button
         type="button"
         onClick={onDismiss}
         aria-label="Dismiss notification"
-        className="ml-2 rounded-full p-0.5 text-slate-400 transition-colors hover:bg-white/10 hover:text-white"
+        className="ml-2 rounded-full p-0.5 text-forest-300 transition-colors hover:bg-white/10 hover:text-cream"
       >
         <X className="h-3.5 w-3.5" />
       </button>

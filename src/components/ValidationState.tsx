@@ -7,11 +7,11 @@ interface ValidationStateProps {
 }
 
 const STATUS_TEXT_CLASS: Record<EmailValidationStatus, string> = {
-  idle: "text-slate-400",
-  checking: "text-indigo-500",
-  valid: "text-emerald-600",
+  idle: "text-stone-400",
+  checking: "text-amber-600",
+  valid: "text-forest-600",
   invalid: "text-red-600",
-  unreachable: "text-amber-600",
+  unreachable: "text-amber-700",
 };
 
 /**

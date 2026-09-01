@@ -4,35 +4,22 @@ import { isDisposableDomain } from "../utils/disposableDomains";
 import { verifyEmailRemote } from "../services/emailApi";
 import { INITIAL_EMAIL_VALIDATION_RESULT, type EmailValidationResult } from "../types/email";
 
-/**
- * Short debounce (well under the assignment's ~200ms perceived-latency
- * target) because the two cheap local checks that run first — syntax and
- * disposable-domain — are synchronous and instant. Only emails that pass
- * both ever trigger a network request, so most keystrokes never reach the
- * API at all.
- */
+// 120ms is enough — the local checks below are synchronous, so the
+// debounce only has to absorb typing, not network latency.
 const DEBOUNCE_MS = 120;
 
-/**
- * Runs the three-layer validation pipeline (syntax -> disposable ->
- * mock MX API) against `email`, debounced, and returns the latest result.
- *
- * Kept separate from EmailValidator.tsx so the state machine and network
- * logic can be tested and reasoned about independently of any UI markup.
- */
+// State machine for the syntax -> disposable -> mock MX pipeline. Kept
+// out of EmailValidator.tsx so it's testable without rendering anything.
 export function useEmailValidation(email: string): EmailValidationResult {
   const trimmed = email.trim();
-  // Holds only the outcome of the debounced/async pipeline below. The
-  // "empty" case is derived directly from `trimmed` at the bottom of this
-  // hook instead of being pushed through an effect+setState, so clearing
-  // the field resets the UI instantly rather than waiting on the debounce.
+  // Empty case is derived below instead of set here, so clearing the
+  // field resets instantly instead of waiting on the debounce.
   const [asyncResult, setAsyncResult] = useState<EmailValidationResult>(
     INITIAL_EMAIL_VALIDATION_RESULT,
   );
   const abortRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
-    // A new value supersedes whatever the previous run was doing.
     abortRef.current?.abort();
 
     if (!trimmed) return;

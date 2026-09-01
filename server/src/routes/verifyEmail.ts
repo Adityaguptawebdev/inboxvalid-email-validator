@@ -4,8 +4,7 @@ import type { VerifyEmailRequestBody } from "../types.js";
 
 export const verifyEmailRouter = Router();
 
-// Simulates the latency of a real DNS/MX lookup so the "checking" UI state
-// is actually visible in the demo instead of resolving instantly.
+// Artificial delay so the "checking" UI state is actually visible.
 const MOCK_LOOKUP_DELAY_MS = 450;
 const MAX_EMAIL_LENGTH = 254; // RFC 5321 max mailbox length
 

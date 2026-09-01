@@ -31,9 +31,7 @@ export function SignupForm() {
       return;
     }
 
-    // Locally invalid or explicitly rejected -> block submission. An
-    // "unreachable" (network error) result has canSubmit: true, so a
-    // failed API call never lands here — that's the fail-open contract.
+    // canSubmit is true for "unreachable" too — that's the fail-open path.
     if (!emailValidation.canSubmit) {
       setSubmitError(
         emailValidation.status === "checking"

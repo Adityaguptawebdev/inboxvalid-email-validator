@@ -1,11 +1,5 @@
-/**
- * Deliberately simple syntax check rather than a full RFC 5322 parser:
- *   local-part@label(.label)*.tld
- * - local part / domain labels must start and end with an alphanumeric char
- * - "(?!.*\.\.)" rejects consecutive dots anywhere (catches "john..test@")
- * - the final label (TLD) must be 2+ letters, which also rejects domains
- *   with no dot at all (e.g. "john@gmail")
- */
+// Not a full RFC 5322 parser. (?!.*\.\.) rejects consecutive dots anywhere;
+// requiring a final label.tld also rejects domains with no dot ("john@gmail").
 const EMAIL_SYNTAX_REGEX =
   /^(?!.*\.\.)[a-zA-Z0-9](?:[a-zA-Z0-9._%+-]*[a-zA-Z0-9])?@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/;
 

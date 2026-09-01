@@ -2,14 +2,8 @@ import { DISPOSABLE_DOMAINS } from "../data/disposableDomains.js";
 import { KNOWN_MAIL_DOMAINS } from "../data/mailDomains.js";
 import type { VerifyEmailResult } from "../types.js";
 
-/**
- * Deliberately simple syntax check rather than a full RFC 5322 parser:
- *   local-part@label(.label)*.tld
- * - local part / labels must start and end with an alphanumeric character
- * - "(?!.*\.\.)" rejects consecutive dots anywhere (catches "john..test@")
- * - the final label (TLD) must be 2+ letters, which also rejects domains
- *   with no dot at all (e.g. "john@gmail")
- */
+// Not a full RFC 5322 parser. (?!.*\.\.) rejects consecutive dots anywhere;
+// requiring a final label.tld also rejects domains with no dot ("john@gmail").
 const EMAIL_SYNTAX_REGEX =
   /^(?!.*\.\.)[a-zA-Z0-9](?:[a-zA-Z0-9._%+-]*[a-zA-Z0-9])?@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/;
 
@@ -27,23 +21,13 @@ export function checkDisposable(domain: string): boolean {
   return DISPOSABLE_DOMAINS.has(domain);
 }
 
-/**
- * Mocked stand-in for a real MX/DNS lookup — see data/mailDomains.ts.
- * Strict allow-list: a domain is only mail-capable if we explicitly know
- * it is. Any other domain — including one with an ordinary-looking TLD —
- * is not, since a real MX lookup would have no record for it either.
- */
+// Mocked stand-in for a real MX/DNS lookup — see data/mailDomains.ts.
 export function checkMx(domain: string): boolean {
   return KNOWN_MAIL_DOMAINS.has(domain);
 }
 
-/**
- * Runs all three validation layers server-side. The frontend already runs
- * the syntax and disposable checks locally for instant feedback, but the
- * server never trusts the client — it recomputes everything so the API is
- * safe to call directly (e.g. from another service, or a malicious client
- * skipping the UI).
- */
+// Re-runs all three layers server-side — never trusts that the client
+// already did this, so the API is safe to call directly.
 export function validateEmailFull(rawEmail: string): VerifyEmailResult {
   const email = rawEmail.trim().toLowerCase();
   const syntax = checkSyntax(email);

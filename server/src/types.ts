@@ -1,12 +1,5 @@
-/**
- * Shared shape of the /api/verify-email contract.
- *
- * This is intentionally duplicated (in a simplified form) on the frontend
- * in src/types/email.ts rather than pulled from a shared workspace package.
- * See the README "Trade-offs" section for why that's an acceptable
- * trade-off at this project's scope.
- */
-
+// Shape of the /api/verify-email contract. Mirrored (simplified) on the
+// frontend in src/types/email.ts rather than a shared package — see README.
 export interface EmailChecks {
   syntax: boolean;
   disposable: boolean;

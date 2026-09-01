@@ -17,10 +17,8 @@ app.get("/api/health", (_req: Request, res: Response) => {
 
 app.use("/api", verifyEmailRouter);
 
-// Optionally serve the built React app so one Node process can host both
-// the API and the frontend — see README "Deployment". This only activates
-// when the repo root's `dist/` (built via `npm run build`) exists, so
-// local dev — where the frontend runs separately on Vite — is unaffected.
+// Serve the built frontend if it exists (see README "Deployment").
+// No-op in local dev, where dist/ isn't built and Vite serves it instead.
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CLIENT_DIST_DIR = path.join(__dirname, "../../dist");
 if (existsSync(path.join(CLIENT_DIST_DIR, "index.html"))) {
@@ -31,9 +29,8 @@ app.use((_req: Request, res: Response) => {
   res.status(404).json({ error: "Not found." });
 });
 
-// Single catch-all: handles malformed JSON from express.json() (thrown
-// before any route runs) and any unexpected error from a route handler,
-// so the API always returns JSON and never crashes the process.
+// Catches malformed JSON from express.json() and any route error, so
+// the API always returns JSON and never crashes the process.
 app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
   if (err instanceof SyntaxError && "body" in err) {
     res.status(400).json({ error: "Invalid JSON body." });

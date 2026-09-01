@@ -1,12 +1,7 @@
 @import "tailwindcss";
 
-/*
- * Brand palette: deep forest green (primary) + muted sage (secondary) on a
- * warm cream background, with charcoal text and beige borders. Deliberately
- * excludes blue/indigo/violet/purple and gradients — see README for why.
- * Tailwind's built-in `stone` scale already reads warm, so it's used
- * directly for neutrals; only the green family and cream tone are custom.
- */
+/* Brand palette: forest green + sage on cream, no blue/purple/gradients.
+   Neutrals use Tailwind's built-in `stone` scale; only green/cream are custom. */
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-serif: "Lora", ui-serif, Georgia, serif;

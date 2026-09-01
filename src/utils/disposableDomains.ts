@@ -1,10 +1,4 @@
-/**
- * Small, explicit list of well-known disposable/temporary email providers,
- * checked locally so obviously-unwanted addresses never reach the API. A
- * real product would back this with a maintained, regularly-updated
- * database instead of a hardcoded list — see README "What I Would
- * Improve Next".
- */
+// Hardcoded for now — a real product would use a maintained list.
 export const DISPOSABLE_DOMAINS = new Set([
   "tempmail.com",
   "mailinator.com",

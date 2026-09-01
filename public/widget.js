@@ -1,15 +1,11 @@
 /**
- * InboxValid.ai embeddable email validation widget.
- *
- * Usage on any plain HTML page (no build step, no framework required):
+ * InboxValid.ai embeddable email validation widget. No build step required:
  *
  *   <input type="email" data-inboxvalid />
  *   <script src="/widget.js" data-api="/api/verify-email"></script>
  *
- * This intentionally re-implements the same syntax regex and disposable
- * list used by the React app (src/utils/*) rather than importing them,
- * since this file has to run standalone in a host page with no bundler.
- * See README "Trade-offs" for that duplication call-out.
+ * Duplicates the syntax regex and disposable list from src/utils/ since
+ * this has to run standalone with no bundler — see README "Trade-offs".
  */
 (function () {
   "use strict";

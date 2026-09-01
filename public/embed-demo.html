@@ -59,11 +59,7 @@
     <label for="signup-email">Email address</label>
     <input id="signup-email" type="email" data-inboxvalid placeholder="you@example.com" />
 
-    <!--
-      data-api points at the same mock backend the React app talks to.
-      During `npm run dev`, Vite's proxy forwards /api/* to the Express
-      server (see vite.config.ts), so this works unmodified.
-    -->
+    <!-- data-api points at the same mock backend the React app talks to. -->
     <script src="/widget.js" data-api="/api/verify-email"></script>
   </body>
 </html>

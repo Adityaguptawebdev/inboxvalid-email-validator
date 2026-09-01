@@ -9,8 +9,7 @@ const FEATURE_PILLS = [
   { icon: Code2, label: "Easy to Embed" },
 ];
 
-// Static previews of the widget's own states, reusing the real
-// ValidationState component so this panel never drifts from the actual UI.
+// Reuses the real ValidationState component so this preview can't drift.
 const EXAMPLE_STATES: EmailValidationResult[] = [
   { status: "checking", message: "Checking email...", canSubmit: false },
   { status: "valid", message: "Email looks good!", canSubmit: true },

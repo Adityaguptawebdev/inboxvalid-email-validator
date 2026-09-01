@@ -14,11 +14,7 @@ const STATUS_TEXT_CLASS: Record<EmailValidationStatus, string> = {
   unreachable: "text-amber-700",
 };
 
-/**
- * Pure presentational mapping from an EmailValidationResult to its visual
- * state. Reused both inside EmailValidator and as a static preview on the
- * marketing panel in App.tsx.
- */
+// Reused both inside EmailValidator and as a static preview in App.tsx.
 export function ValidationState({ result, id }: ValidationStateProps) {
   const isAlertRole = result.status === "invalid";
 

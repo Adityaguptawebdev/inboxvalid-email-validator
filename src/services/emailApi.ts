@@ -3,11 +3,8 @@ import type { VerifyEmailResponse } from "../types/email";
 const API_ENDPOINT = "/api/verify-email";
 const REQUEST_TIMEOUT_MS = 5000;
 
-/**
- * Normalizes every failure mode (network error, timeout, non-2xx status,
- * malformed JSON, unexpected shape) into one error type so callers can
- * implement a single fail-open catch block instead of branching on cause.
- */
+// Normalizes every failure mode into one error type so callers can just
+// have a single fail-open catch block instead of branching on cause.
 export class EmailApiError extends Error {
   constructor(message: string) {
     super(message);
@@ -29,11 +26,8 @@ function isValidResponseShape(data: unknown): data is VerifyEmailResponse {
   );
 }
 
-/**
- * Calls the mock verification endpoint. Always throws EmailApiError on
- * failure — it never returns a "best guess" result — so the caller (the
- * useEmailValidation hook) is the single place that decides to fail open.
- */
+// Always throws EmailApiError on failure — never a "best guess" result —
+// so useEmailValidation is the single place that decides to fail open.
 export async function verifyEmailRemote(
   email: string,
   signal?: AbortSignal,

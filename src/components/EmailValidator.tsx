@@ -17,11 +17,7 @@ export interface EmailValidatorProps {
   disabled?: boolean;
 }
 
-/**
- * Reusable, embeddable email input: owns the field's markup and delegates
- * the actual three-layer validation pipeline to useEmailValidation, so
- * this component only has to know how to render a result, not compute one.
- */
+// Owns the markup, delegates the validation pipeline to useEmailValidation.
 export function EmailValidator({
   value,
   onChange,

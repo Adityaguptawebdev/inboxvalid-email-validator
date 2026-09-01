@@ -9,6 +9,7 @@ Built as a technical assignment demo for InboxValid.ai / Tvaram Private
 Limited.
 
 ---
+<img width="1492" height="888" alt="image" src="https://github.com/user-attachments/assets/99b46acc-b581-4b7f-adeb-67c0fc689f3a" />
 
 ## Table of contents
 

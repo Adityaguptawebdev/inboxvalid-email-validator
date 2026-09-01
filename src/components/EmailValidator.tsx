@@ -72,25 +72,41 @@ export function EmailValidator({
             result.status === "idle" ? "pr-4" : "pr-10"
           } ${borderClass}`}
         />
-        <StatusEndIcon status={result.status} />
+        <StatusEndIcon status={result.status} onClear={() => onChange("")} />
       </div>
       <ValidationState id={statusId} result={result} />
     </div>
   );
 }
 
-/** Small status icon mirrored inside the input's right edge, next to the mail icon. */
-function StatusEndIcon({ status }: { status: EmailValidationStatus }) {
-  const baseClass = "pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2";
+// Invalid state doubles as a clear button; the rest are purely decorative.
+function StatusEndIcon({ status, onClear }: { status: EmailValidationStatus; onClear: () => void }) {
+  const baseClass = "absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2";
   switch (status) {
     case "checking":
-      return <Loader2 className={`${baseClass} animate-spin text-amber-600`} aria-hidden="true" />;
+      return (
+        <Loader2
+          className={`pointer-events-none ${baseClass} animate-spin text-amber-600`}
+          aria-hidden="true"
+        />
+      );
     case "valid":
-      return <CheckCircle2 className={`${baseClass} text-forest-600`} aria-hidden="true" />;
+      return (
+        <CheckCircle2 className={`pointer-events-none ${baseClass} text-forest-600`} aria-hidden="true" />
+      );
     case "invalid":
-      return <XCircle className={`${baseClass} text-red-600`} aria-hidden="true" />;
+      return (
+        <button
+          type="button"
+          onClick={onClear}
+          aria-label="Clear email"
+          className={`${baseClass} text-red-600 hover:text-red-700`}
+        >
+          <XCircle className="h-4 w-4" aria-hidden="true" />
+        </button>
+      );
     case "unreachable":
-      return <Info className={`${baseClass} text-amber-700`} aria-hidden="true" />;
+      return <Info className={`pointer-events-none ${baseClass} text-amber-700`} aria-hidden="true" />;
     case "idle":
       return null;
   }
